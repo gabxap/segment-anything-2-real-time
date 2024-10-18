@@ -531,7 +531,8 @@ class SAM2Base(torch.nn.Module):
             # We also allow taking the memory frame non-consecutively (with r>1), in which case
             # we take (self.num_maskmem - 2) frames among every r-th frames plus the last frame.
             r = self.memory_temporal_stride_for_eval
-            for t_pos in range(1, self.num_maskmem):
+            num_prev_frames = 1
+            for t_pos in range(1, num_prev_frames+1):
                 t_rel = self.num_maskmem - t_pos  # how many frames before current frame
                 if t_rel == 1:
                     # for t_rel == 1, we take the last frame (regardless of r)
